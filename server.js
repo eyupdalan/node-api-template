@@ -1,17 +1,9 @@
-const express = require('express');
-var bodyParser = require("body-parser");
+import "babel-polyfill";
+import express from "express";
+import routes from "./routes";
 
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-
-const port = 8000;
-app.listen(port, () => {
-    console.log('We are live on ' + port);
-});
-
-app.get('/areyoualive', (req, res) => {
-    res
-        .status(200)
-        .send('Yes, I am alive!');
-});
+app.use(express.json());
+app.use(routes);
+app.listen(process.env.PORT || 8080);
+export default app;
